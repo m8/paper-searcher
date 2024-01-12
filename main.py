@@ -37,14 +37,13 @@ while True:
     if query == "exit":
         break
     else:
-        results = db.search(query)
+        results = db.search(query.lower())
         table = Table(title="Search results")
         table.add_column("Year", justify="left", style="magenta")
+        table.add_column("Conference", justify="left", style="green")
         table.add_column("Title", justify="left", style="cyan")
-        table.add_column("Venue", justify="left", style="green")
-        table.add_column("DOI", justify="left", style="yellow")
+        table.add_column("Link", justify="left", style="yellow")
         for result in results:
-            table.add_row(str(result.year), f"[link=https://dl.acm.org/doi/{result.doi}]{result.title}[/link]!", 
-                          result.venue, result.doi)
+            table.add_row(str(result.year), result.venue, f"[link={result.ee}]{result.title}[/link]!", result.ee)
         console.print(table)
         print()

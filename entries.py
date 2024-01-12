@@ -61,11 +61,9 @@ class dump_database:
         if len(venues) > 0:
             if entry.u_venue not in venues:
                 return False
-        
         for keyword in keywords:
             if keyword.lower() not in entry.title.lower():
                 return False
-            
         return True
 
     def search(self, query):
@@ -84,6 +82,7 @@ class dump_database:
         entry.venue = json_entry['info']['venue'] if type(json_entry['info']['venue']) is str else ""
         entry.year = json_entry['info']['year']
         entry.doi = json_entry['info']['doi'] if 'doi' in json_entry['info'] else ""
+        entry.ee = json_entry['info']['ee'] if 'ee' in json_entry['info'] else ""
         entry.u_venue = venue
         return entry
 
@@ -95,3 +94,4 @@ class _entry:
         self.venue = ""
         self.year = 0
         self.doi = ""     
+        self.ee = ""
